@@ -57,9 +57,9 @@ class Keyboard(object):
             pygame.K_q: 'Q', pygame.K_r: 'R', pygame.K_s: 'S', pygame.K_t: 'T',
             pygame.K_u: 'U', pygame.K_v: 'V', pygame.K_w: 'W', pygame.K_x: 'X',
             pygame.K_y: 'Y', pygame.K_z: 'Z',
-            pygame.K_1: '1', pygame.K_2: '2', pygame.K_3: '3', pygame.K_4: '4',
-            pygame.K_5: '5', pygame.K_6: '6', pygame.K_7: '7', pygame.K_8: '8',
-            pygame.K_9: '9', pygame.K_0: '0'}
+            pygame.K_KP1: '1', pygame.K_KP2: '2', pygame.K_KP3: '3', pygame.K_KP4: '4',
+            pygame.K_KP5: '5', pygame.K_KP6: '6', pygame.K_KP7: '7', pygame.K_KP8: '8',
+            pygame.K_KP9: '9', pygame.K_KP0: '0'}
 
 
 def main():
@@ -138,7 +138,7 @@ def main():
     curTime = 0
     aliensThisWave, aliensLeftThisWave, Alien.numOffScreen = 10, 10, 10
     wave = 1
-    bombsHeld = 3
+    bombsHeld = 1
     score = 0
     missilesFired = 0
     powerupTime = 10 * clockTime
@@ -481,7 +481,7 @@ def main():
                 return True
             elif (event.type == pygame.KEYDOWN
                   and event.key in Keyboard.keys.keys()
-                  and len(nameBuffer) < 8):
+                  and len(nameBuffer) < 10):
                 nameBuffer.append(Keyboard.keys[event.key])
                 name = ''.join(nameBuffer)
             elif (event.type == pygame.KEYDOWN

@@ -168,13 +168,13 @@ class Ship(MasterSprite):
         self.vert = 0
         self.horiz = 0
         if keyState[pygame.K_UP]:
-            self.vert -= 2 * MasterSprite.speed
+            self.vert -= 10 * MasterSprite.speed
         if keyState[pygame.K_LEFT]:
-            self.horiz -= 2 * MasterSprite.speed
+            self.horiz -= 10 * MasterSprite.speed
         if keyState[pygame.K_DOWN]:
-            self.vert += 2 * MasterSprite.speed
+            self.vert += 10 * MasterSprite.speed
         if keyState[pygame.K_RIGHT]:
-            self.horiz += 2 * MasterSprite.speed
+            self.horiz += 10 * MasterSprite.speed
 
     def update(self,screen_size):
         self.screen_size = screen_size
