@@ -118,23 +118,23 @@ def main():
     allsprites = pygame.sprite.RenderPlain((ship,))
     MasterSprite.allsprites = allsprites
     Alien.pool = pygame.sprite.Group(
-        [alien(screen_size) for alien in initialAlienTypes for _ in range(5)])
+        [alien(screen_size) for alien in initialAlienTypes for _ in range(10)])
     Alien.active = pygame.sprite.Group()
-    Missile.pool = pygame.sprite.Group([Missile(screen_size) for _ in range(10)])
+    Missile.pool = pygame.sprite.Group([Missile(screen_size) for _ in range(7)])
     Missile.active = pygame.sprite.Group()
-    Explosion.pool = pygame.sprite.Group([Explosion(screen_size) for _ in range(10)])
+    Explosion.pool = pygame.sprite.Group([Explosion(screen_size) for _ in range(2)])
     Explosion.active = pygame.sprite.Group()
     bombs = pygame.sprite.Group()
     powerups = pygame.sprite.Group()
 
-    # Sounds
+    # SoundsH
     missile_sound = load_sound('missile.ogg')
     bomb_sound = load_sound('bomb.ogg')
     alien_explode_sound = load_sound('alien_explode.ogg')
     ship_explode_sound = load_sound('ship_explode.ogg')
     load_music('music_loop.ogg')
 
-    alienPeriod = clockTime // 2
+    alienPeriod = clockTime // 10
     curTime = 0
     aliensThisWave, aliensLeftThisWave, Alien.numOffScreen = 10, 10, 10
     wave = 1
@@ -245,12 +245,12 @@ def main():
                 elif selection == 5:
                     return
             elif (event.type == pygame.KEYDOWN
-                  and event.key == pygame.K_UP
+                  and event.key == pygame.K_b
                   and selection > 1
                   and not showHiScores):
                 selection -= 1
             elif (event.type == pygame.KEYDOWN
-                  and event.key == pygame.K_DOWN
+                  and event.key == pygame.K_n
                   and selection < len(menuDict)
                   and not showHiScores):
                 selection += 1
@@ -405,28 +405,41 @@ def main():
                 nextWaveNumPos = nextWaveNum.get_rect(
                     midtop=nextWavePos.midbottom)
                 textposition.extend([nextWavePos, nextWaveNumPos])
-                if wave % 4 == 0:
-                    speedUpText = font.render('SPEED UP!', 1, RED)
-                    speedUpPos = speedUpText.get_rect(
-                        midtop=nextWaveNumPos.midbottom)
-                    text.append(speedUpText)
-                    textposition.append(speedUpPos)
+                # if wave % 4 == 0:
+                #     speedUpText = font.render('SPEED UP!', 1, RED)
+                #     speedUpPos = speedUpText.get_rect(
+                #         midtop=nextWaveNumPos.midbottom)
+                #     text.append(speedUpText)
+                #     textposition.append(speedUpPos)
+                # else:
+                #     speedUpText = font.render('SPEED UP!', 1, RED)
+                #     speedUpPos = speedUpText.get_rect(
+                #         midtop=nextWaveNumPos.midbottom)
+                #     text.append(speedUpText)
+                #     textposition.append(speedUpPos)
             elif betweenWaveCount == 0:
-                if wave % 4 == 0:
-                    speed += 0.5
-                    MasterSprite.speed = speed
-                    ship.initializeKeys()
-                    aliensThisWave = 10
-                    aliensLeftThisWave = Alien.numOffScreen = aliensThisWave
-                else:
-                    aliensThisWave *= 2
-                    aliensLeftThisWave = Alien.numOffScreen = aliensThisWave
+                # if wave % 4 == 0:
+                #     speed += 1
+                #     MasterSprite.speed = speed
+                #     ship.initializeKeys()
+                #     aliensThisWave = 10
+                #     aliensLeftThisWave = Alien.numOffScreen = aliensThisWave
+                # else:
+                    # speed += 0.5
+                    # MasterSprite.speed = speed
+                    # ship.initializeKeys()
+                    # aliensThisWave = 10
+                    # aliensLeftThisWave = Alien.numOffScreen = aliensThisWave
+                    # aliensThisWave *= 2
+                    # aliensLeftThisWave = Alien.numOffScreen = aliensThisWave
+                aliensThisWave *= 2
+                aliensLeftThisWave = Alien.numOffScreen = aliensThisWave
                 if wave == 1:
-                    Alien.pool.add([Fasty(screen_size) for _ in range(5)])
+                    Alien.pool.add([Fasty(screen_size) for _ in range(10)])
                 if wave == 2:
-                    Alien.pool.add([Roundy(screen_size) for _ in range(5)])
+                    Alien.pool.add([Roundy(screen_size) for _ in range(10)])
                 if wave == 3:
-                    Alien.pool.add([Crawly(screen_size) for _ in range(5)])
+                    Alien.pool.add([Crawly(screen_size) for _ in range(10)])
                 wave += 1
                 betweenWaveCount = betweenWaveTime
 

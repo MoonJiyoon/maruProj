@@ -227,10 +227,15 @@ class Alien(MasterSprite):
         if len(cls.pool) > 0 and cls.numOffScreen > 0:
             alien = random.choice(cls.pool.sprites())
             if isinstance(alien, Crawly):
+                # alien.rect.midbottom = (random.choice(
+                #     (alien.area.left, alien.area.right)),
+                #     random.randint(
+                #     (alien.area.bottom * 3) // 4,
+                #     alien.area.bottom))
                 alien.rect.midbottom = (random.choice(
                     (alien.area.left, alien.area.right)),
                     random.randint(
-                    (alien.area.bottom * 3) // 4,
+                    (alien.area.bottom) // 3,
                     alien.area.bottom))
             else:
                 alien.rect.midtop = (random.randint(
@@ -267,7 +272,7 @@ class Alien(MasterSprite):
 class Siney(Alien):
     def __init__(self,screen_size):
         super().__init__('green',screen_size)
-        self.amp = random.randint(self.rect.width, 3 * self.rect.width)
+        self.amp = random.randint(3*self.rect.width, 10 * self.rect.width)
         self.freq = (1 / 20)
         self.moveFunc = lambda: (self.amp * math.sin(self.loc * self.freq), 0)
 
@@ -275,8 +280,8 @@ class Siney(Alien):
 class Roundy(Alien):
     def __init__(self,screen_size):
         super().__init__('red',screen_size)
-        self.amp = random.randint(self.rect.width, 2 * self.rect.width)
-        self.freq = 1 / (20)
+        self.amp = random.randint(3*self.rect.width, 6 * self.rect.width)
+        self.freq = 2 / (20)
         self.moveFunc = lambda: (
             self.amp *
             math.sin(
@@ -304,13 +309,14 @@ class Spikey(Alien):
 class Fasty(Alien):
     def __init__(self,screen_size):
         super().__init__('white',screen_size)
-        self.moveFunc = lambda: (0, 3 * self.loc)
+        self.moveFunc = lambda: (0, 8 * self.loc)
 
 
 class Crawly(Alien):
     def __init__(self,screen_size):
         super().__init__('yellow',screen_size)
-        self.moveFunc = lambda: (self.loc, 0)
+        self.moveFunc = lambda: (3*self.loc, 0)
+
 
     def update(self,screen_size):
         horiz, vert = self.moveFunc()
